@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Slack API
+slack_api_token.py
+
 # C extensions
 *.so
 
