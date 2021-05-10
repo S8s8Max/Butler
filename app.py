@@ -5,9 +5,9 @@ import json
 
 DEBUG = False
 if DEBUG:
-    import butler_local
+    from butler_local import SendMessage
 else:
-    import butler
+    from butler import SendMessage
 
 app = Flask(__name__)
 
@@ -20,8 +20,6 @@ def post():
     data = request.data.decode('utf-8')
     data = json.loads(data)
 
-    print(data)
-    
     # for challenge of slack api
     if 'challenge' in data:
         token = str(data['challenge'])
@@ -34,6 +32,10 @@ def post():
             print("user = ", event["user"])
         if "text" in event:
             print("text = ", event["text"])
+            response_text = "Did you say '" + event["text"] + "'?"
+
+    SendMessage(response_text)
+
     return Response("nothing", mimetype='text/plane')
 
 
