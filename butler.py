@@ -13,4 +13,11 @@ def SendMessage(text: str):
     except SlackApiError as e:
         print("Got an Error : ", e)
 
+def ParseMessage(text: str) -> bool:
+    length = len(text)
+    if length >= 7:
+        if text[0] == "[" and text[1] == "/" and text[2] == "m" and text[3] == "e" and text[4] == "m" and text[5] == "o" and text[6] == "]":
+            return True
 
+    else:
+        return False

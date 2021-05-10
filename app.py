@@ -5,9 +5,10 @@ import json
 
 DEBUG = False
 if DEBUG:
-    from butler_local import SendMessage
+    from butler_local import SendMessage, ParseMessage
 else:
-    from butler import SendMessage
+    from butler import SendMessage, ParseMessage
+
 
 app = Flask(__name__)
 
@@ -32,7 +33,12 @@ def post():
             print("user = ", event["user"])
         if "text" in event:
             print("text = ", event["text"])
-            response_text = "Did you say '" + event["text"] + "'?"
+            text_data = event["text"]
+
+    if ParseMessage(text_data):
+        SendMessage("Successed!")
+        # ここで自然言語処理
+
 
 
     return Response("nothing", mimetype='text/plane')
