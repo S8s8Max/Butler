@@ -34,7 +34,6 @@ def post():
             print("text = ", event["text"])
             response_text = "Did you say '" + event["text"] + "'?"
 
-    SendMessage(response_text)
 
     return Response("nothing", mimetype='text/plane')
 
