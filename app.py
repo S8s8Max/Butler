@@ -3,6 +3,12 @@ from flask import Flask, request, Response
 import requests
 import json
 
+DEBUG = False
+if DEBUG:
+    import butler_local
+else:
+    import butler
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -13,6 +19,9 @@ def index():
 def post():
     data = request.data.decode('utf-8')
     data = json.loads(data)
+
+    print(data)
+    
     # for challenge of slack api
     if 'challenge' in data:
         token = str(data['challenge'])
