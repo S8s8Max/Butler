@@ -12,6 +12,7 @@ def NLP(text: str) -> str:
     ２、上位三つをリターンする。
     """
     ### Initialization ###
+    nltk.download('stopwords')
     pke.base.lang_stopwords["ja_ginza"] = "japanese"
     spacy_model = spacy.load("ja_ginza")
     print(spacy_model)
