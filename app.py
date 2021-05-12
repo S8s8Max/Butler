@@ -2,7 +2,7 @@
 from flask import Flask, request, Response
 import requests
 import json
-from NLP import NLP
+#from NLP import NLP
 
 DEBUG = False
 if DEBUG:
@@ -40,8 +40,8 @@ def post():
 
     if CheckMessage(text_data):
         # ここで自然言語処理
-        result = NLP(text_data)
-
+        #result = NLP(text_data)
+        result = "Successed!"
         SendMessage(result)
 
 
