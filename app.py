@@ -44,8 +44,7 @@ def post():
         result = "Successed!"
         SendMessage(result)
 
-
-    #return Response("nothing", mimetype='text/plane')
+    return Response("nothing", mimetype='text/plane')
 
 
 if __name__ == '__main__':
