@@ -6,6 +6,8 @@ import nltk
 import spacy
 from spacy.lang.ja import stop_words
 
+nltk.download('stopwords')
+
 def NLP(text: str) -> str:
     """
     １、引数のテキストからキーフレーズを抽出。
