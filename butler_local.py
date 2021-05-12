@@ -21,7 +21,7 @@ def SendMessage(text: str):
         print("Got an Error : ", e)
 
 
-def ParseMessage(text: str) -> bool:
+def CheckMessage(text: str) -> bool:
     """
     テキストが文頭に　[/memo] という文字列を含む時にだけNLPする
     """

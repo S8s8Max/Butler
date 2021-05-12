@@ -5,9 +5,9 @@ import json
 
 DEBUG = False
 if DEBUG:
-    from butler_local import SendMessage, ParseMessage
+    from butler_local import SendMessage, CheckMessage
 else:
-    from butler import SendMessage, ParseMessage
+    from butler import SendMessage, CheckMessage
 
 
 app = Flask(__name__)
@@ -37,13 +37,15 @@ def post():
             print("text = ", event["text"])
             text_data = event["text"]
 
-    if ParseMessage(text_data):
-        SendMessage("Successed!")
+    if CheckMessage(text_data):
+
         # ここで自然言語処理
+        # result = NLP(text_data)
+        result = "Successed!"
+        SendMessage(result)
 
 
-
-    return Response("nothing", mimetype='text/plane')
+    #return Response("nothing", mimetype='text/plane')
 
 
 if __name__ == '__main__':
