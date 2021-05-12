@@ -16,6 +16,8 @@ app = Flask(__name__)
 def index():
     return 'hello, world'
 
+
+# Slackからデータがポストされた時の挙動
 @app.route("/api", methods=["POST"])
 def post():
     data = request.data.decode('utf-8')

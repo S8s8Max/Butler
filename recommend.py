@@ -1,4 +1,4 @@
-#NLP
+# -*- coding: utf-8 -*-
 
 def Recommend(text: str) -> str:
     print(text)
