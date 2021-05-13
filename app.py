@@ -4,7 +4,7 @@ import requests
 import json
 from NLP import NLP
 
-DEBUG = True
+DEBUG = False
 if DEBUG:
     from butler_local import SendMessage, CheckMessage
 else:
