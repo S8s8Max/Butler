@@ -29,8 +29,19 @@ def NLP(text: str) -> str:
     extractor.candidate_selection(pos={"NOUN","PROPN","ADJ","NUM"})
     extractor.candidate_weighting(threshold=0.74, method="average", alpha=1.1)
 
-    key_phrases = extractor.get_n_best(n=3)
+    # Change a number of 'key_phrase' according to the length of the input text.
+    if len(text) < 10:
+        phrase_num = 1
+    elif len(text) >= 10 and len(text) < 30:
+        phrase_num = 2
+    elif len(text) >= 30 and len(text) < 50:
+        phrase_num = 3
+    else:
+        phrase_num = 4
 
+    key_phrases = extractor.get_n_best(n=phrase_num)
+
+    # "memo" won't be included.
     targets = []
     for phrase in key_phrases:
         if phrase[0] == "memo":

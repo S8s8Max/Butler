@@ -2,7 +2,10 @@
 from flask import Flask, request, Response
 import requests
 import json
+
+# Self-dev
 from NLP import NLP
+from Search import Search
 
 DEBUG = False
 if DEBUG:
@@ -37,16 +40,18 @@ def post():
             print("text = ", event["text"])
             text_data = event["text"]
 
-    if CheckMessage(text_data):
-        # ここで自然言語処理
-        result = NLP(text_data)
-        #result = "Successed!"
+    message = ""
 
-        message = ""
+    if CheckMessage(text_data):
+        # NLP here.
+        result = NLP(text_data)
+        # Search academic papers from arxive.
+        papers = Search(result)
+
+        # Make a message including info about papers.
         if isinstance(result, list):
             for i in range(len(result)):
                 message += f"{i+1} : {result[i]}\n"
-
         SendMessage(message)
 
     return Response(message, mimetype='text/plane')
