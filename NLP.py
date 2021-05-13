@@ -16,7 +16,6 @@ def NLP(text: str) -> str:
     ### Initialization ###
     pke.base.lang_stopwords["ja_ginza"] = "japanese"
     spacy_model = spacy.load("ja_ginza")
-    print(spacy_model)
     stopwords = list(stop_words.STOP_WORDS)
     nltk.corpus.stopwords.words_org = nltk.corpus.stopwords.words
     nltk.corpus.stopwords.words = lambda lang : stopwords if lang == 'japanese' else nltk.corpus.stopwords.words_org(lang)
@@ -36,6 +35,9 @@ def NLP(text: str) -> str:
 
     targets = []
     for phrase in key_phrases:
-        targets.append(phrase[0])
+        if phrase[0] == "memo":
+            continue
+        else:
+            targets.append(phrase[0])
 
     return targets

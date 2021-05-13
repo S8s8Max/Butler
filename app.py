@@ -2,9 +2,9 @@
 from flask import Flask, request, Response
 import requests
 import json
-#from NLP import NLP
+from NLP import NLP
 
-DEBUG = False
+DEBUG = True
 if DEBUG:
     from butler_local import SendMessage, CheckMessage
 else:
@@ -30,7 +30,6 @@ def post():
         return Response(token, mimetype='text/plane')
     # for events which you added
     if 'event' in data:
-        print("get event")
         event = data['event']
         if 'user' in event:
             print("user = ", event["user"])
@@ -40,11 +39,17 @@ def post():
 
     if CheckMessage(text_data):
         # ここで自然言語処理
-        #result = NLP(text_data)
-        result = "Successed!"
-        SendMessage(result)
+        result = NLP(text_data)
+        #result = "Successed!"
 
-    return Response("nothing", mimetype='text/plane')
+        message = ""
+        if isinstance(result, list):
+            for i in range(len(result)):
+                message += f"{i+1} : {result[i]}\n"
+
+        SendMessage(message)
+
+    return Response(message, mimetype='text/plane')
 
 
 if __name__ == '__main__':
