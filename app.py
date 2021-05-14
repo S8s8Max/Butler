@@ -7,7 +7,7 @@ import json
 from NLP import NLP
 from Search import SearchArxiv
 
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
     from butler_local import SendMessage, CheckMessage
