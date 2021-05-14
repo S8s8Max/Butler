@@ -5,9 +5,10 @@ import json
 
 # Self-dev
 from NLP import NLP
-from Search import Search
+from Search import SearchArxiv
 
-DEBUG = False
+DEBUG = True
+
 if DEBUG:
     from butler_local import SendMessage, CheckMessage
 else:
@@ -40,23 +41,24 @@ def post():
             print("text = ", event["text"])
             text_data = event["text"]
 
+    print(1)
     message = ""
 
     if CheckMessage(text_data):
+        print(2)
         # NLP here.
         result = NLP(text_data)
         # Search academic papers from arxive.
-        papers = Search(result)
-
-        # Make a message including info about papers.
-        if isinstance(result, list):
-            for i in range(len(result)):
-                message += f"{i+1} : {result[i]}\n"
+        papers_info = SearchArxiv(result)
+        message += papers_info
         SendMessage(message)
 
+    print(3)
     return Response(message, mimetype='text/plane')
 
 
 if __name__ == '__main__':
     app.run()
 
+
+# curl -X POST -H "Content-Type: application/json" http://127.0.0.1:5000/ -d '{"event":{"text":"機械学習　フェイク"}}'

@@ -27,6 +27,7 @@ flatbuffers==1.12
 future==0.18.2
 gast==0.3.3
 ginza==4.0.5
+googletrans==4.0.0-rc1
 gunicorn==20.1.0
 idna==2.10
 itsdangerous==1.1.0
