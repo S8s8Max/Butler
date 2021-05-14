@@ -18,7 +18,7 @@ def SearchArxiv(search_words: list) -> str:
     # search in arxiv.
     search = arxiv.Search(
         query=Query,
-        max_results=3,
+        max_results=2,
     )
 
     data = f"Search Query : {Query}\n\n"

@@ -28,6 +28,8 @@ def post():
     data = request.data.decode('utf-8')
     data = json.loads(data)
 
+    text_data = ""
+
     # for challenge of slack api
     if 'challenge' in data:
         token = str(data['challenge'])
@@ -35,17 +37,13 @@ def post():
     # for events which you added
     if 'event' in data:
         event = data['event']
-        if 'user' in event:
-            print("user = ", event["user"])
         if "text" in event:
-            print("text = ", event["text"])
+            print("Got text : ", event["text"][0:10]+"...")
             text_data = event["text"]
 
-    print(1)
     message = ""
 
-    if CheckMessage(text_data):
-        print(2)
+    if len(text_data) > 1 and CheckMessage(text_data):
         # NLP here.
         result = NLP(text_data)
         # Search academic papers from arxive.
@@ -53,7 +51,6 @@ def post():
         message += papers_info
         SendMessage(message)
 
-    print(3)
     return Response(message, mimetype='text/plane')
 
 
